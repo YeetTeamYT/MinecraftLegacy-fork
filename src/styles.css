@@ -1,0 +1,669 @@
+:root {
+  --bg: #121214;
+  --bg-2: #1a1b1f;
+  --panel: rgb(23 25 30 / 0.55);
+  --stone: #c3bcb5;
+  --text: #efebe7;
+  --muted: #bfb6ae;
+  --line: rgb(65 71 84 / 0.4);
+  --accent: #88bb55;
+  --accent-2: #709944;
+  --danger: #ff7d7d;
+  --mc-btn: #737373;
+  --mc-btn-light: #9d9d9d;
+  --mc-btn-dark: #565656;
+  --mc-btn-shadow: #3a3a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Minecraft", "Trebuchet MS", sans-serif;
+  color: var(--text);
+  background: #0d0e11;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(10px, 2.5vw, 20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--legacy-bg-image);
+  background-size: 480px;
+  background-repeat: repeat;
+  background-position: center;
+  opacity: 0.035;
+  pointer-events: none;
+  image-rendering: pixelated;
+  mix-blend-mode: luminosity;
+}
+
+/* Steve & Alex top-right */
+.top-link {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 3;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+}
+
+.top-link:hover {
+  filter: brightness(1.18);
+}
+
+.top-link-image {
+  display: block;
+  width: clamp(64px, 8vw, 110px);
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/* Main content panel */
+.content-panel {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 100%);
+  margin-top: clamp(10px, 3vh, 32px);
+  border: 2px solid rgb(80 88 104 / 0.3);
+  background: rgb(14 16 20 / 0.6);
+  border-radius: 4px;
+  padding: 20px clamp(14px, 3.5vw, 32px) 24px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 20px 50px rgb(0 0 0 / 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: opacity 320ms ease;
+}
+
+.content-panel.is-waiting {
+  opacity: 0;
+}
+
+/* Hero / Logo */
+.hero {
+  text-align: center;
+}
+
+.hero-logo {
+  width: min(100%, 560px);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 0 rgb(0 0 0 / 0.38));
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.64rem;
+  color: var(--muted);
+}
+
+.seo-heading {
+  margin: 8px 0 0;
+  font-size: clamp(0.88rem, 1.5vw, 1.08rem);
+  line-height: 1.2;
+}
+
+.seo-intro {
+  margin: 6px auto 0;
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.discord-link {
+  display: inline-block;
+  margin: 8px auto 0;
+  padding: 5px 14px;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #7289da;
+  text-decoration: none;
+  border: 2px solid rgb(114 137 218 / 0.25);
+  border-radius: 2px;
+  background: rgb(114 137 218 / 0.08);
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.4);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    inset 0 -2px 0 rgb(0 0 0 / 0.15);
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.discord-link:hover {
+  background: rgb(114 137 218 / 0.18);
+  border-color: rgb(114 137 218 / 0.5);
+  color: #fff;
+}
+
+/* Search */
+.search-row {
+  margin: 16px auto 12px;
+  width: min(700px, 100%);
+  display: grid;
+  gap: 6px;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+.search-label {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+input[type="search"] {
+  width: 100%;
+  border: 2px solid #3e4452;
+  border-radius: 2px;
+  padding: 9px 80px 9px 14px;
+  font-size: 0.84rem;
+  font-family: inherit;
+  color: var(--text);
+  background: rgb(0 0 0 / 0.5);
+  outline: none;
+  box-shadow:
+    inset 0 2px 0 rgb(0 0 0 / 0.3),
+    inset 0 -1px 0 rgb(255 255 255 / 0.04);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.clear-search {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  border: 2px solid #4f5663;
+  background: var(--mc-btn-dark);
+  color: var(--text);
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 6px 10px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.5);
+  box-shadow:
+    inset 0 -2px 0 rgb(0 0 0 / 0.25),
+    inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+.clear-search:hover {
+  background: var(--mc-btn);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+input[type="search"]:focus {
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 2px 0 rgb(0 0 0 / 0.3),
+    0 0 0 2px rgb(136 187 85 / 0.2);
+}
+
+/* Repo list */
+.repo-count {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.repo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.repo-item {
+  padding: 0;
+}
+
+/* Minecraft-style button cards */
+.repo-link-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 14px;
+  color: inherit;
+  text-decoration: none;
+  background: rgb(50 50 50 / 0.55);
+  border: 2px solid rgb(80 80 80 / 0.45);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    inset 0 -2px 0 rgb(0 0 0 / 0.2),
+    0 2px 6px rgb(0 0 0 / 0.25);
+  transition: background 120ms ease, border-color 120ms ease, transform 80ms ease;
+}
+
+.repo-link-row:hover {
+  background: rgb(70 70 70 / 0.6);
+  border-color: rgb(136 187 85 / 0.5);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    inset 0 -2px 0 rgb(0 0 0 / 0.25),
+    0 4px 12px rgb(0 0 0 / 0.35);
+}
+
+.repo-link-row:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 0 rgb(0 0 0 / 0.3),
+    0 1px 2px rgb(0 0 0 / 0.2);
+}
+
+.repo-priority {
+  text-align: center;
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 0.78rem;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.6);
+}
+
+.repo-link {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  word-break: break-word;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.4);
+}
+
+.repo-link-row:hover .repo-link {
+  color: #fff;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0 4px;
+}
+
+.page-btn {
+  font-family: "Minecraft", "Trebuchet MS", sans-serif;
+  font-size: 0.78rem;
+  color: var(--text);
+  background: var(--mc-btn);
+  border: 2px solid;
+  border-color: var(--mc-btn-light) var(--mc-btn-dark) var(--mc-btn-dark) var(--mc-btn-light);
+  border-radius: 2px;
+  padding: 5px 14px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.5);
+  box-shadow: 0 2px 0 var(--mc-btn-shadow);
+  transition: background 100ms ease, transform 80ms ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--mc-btn-light);
+}
+
+.page-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  border-color: var(--mc-btn-dark) var(--mc-btn-light) var(--mc-btn-light) var(--mc-btn-dark);
+  box-shadow: none;
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-info {
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.5);
+}
+
+/* Technoblade memorial */
+.techno-memorial {
+  position: relative;
+  z-index: 1;
+  width: min(1000px, 100%);
+  margin: 28px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3.5vw, 44px);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.techno-pig {
+  width: clamp(100px, 16vw, 200px);
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 5px 16px rgb(0 0 0 / 0.55));
+  transition: transform 220ms ease, filter 220ms ease;
+  flex-shrink: 0;
+}
+
+.techno-memorial:hover .techno-pig {
+  transform: scale(1.06);
+  filter: drop-shadow(0 8px 28px rgb(212 160 160 / 0.45));
+}
+
+.techno-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.techno-quote {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.6vw, 2.2rem);
+  color: var(--text);
+  line-height: 1.15;
+  text-shadow: 2px 2px 0 rgb(0 0 0 / 0.5);
+  transition: color 180ms ease;
+}
+
+.techno-memorial:hover .techno-quote {
+  color: #d4a0a0;
+}
+
+.techno-attr {
+  margin: 0;
+  font-size: clamp(0.88rem, 1.4vw, 1.1rem);
+  color: var(--muted);
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.4);
+}
+
+.techno-note {
+  margin: 6px 0 0;
+  font-size: clamp(0.72rem, 1.1vw, 0.88rem);
+  color: rgb(191 182 174 / 0.65);
+  font-style: italic;
+}
+
+/* Status / Error */
+.status {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+/* Loader */
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  background: linear-gradient(180deg, #0a0b0d, #111318);
+  opacity: 1;
+  transition: opacity 420ms ease;
+}
+
+.loader-screen.is-fading-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-art {
+  width: clamp(76px, 12vw, 136px);
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.loader-art.is-gear {
+  animation: loader-spin 1.7s linear infinite;
+}
+
+.loader-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loader-disclaimer {
+  margin: 16px 0 0;
+  color: rgb(191 182 174 / 0.35);
+  font-size: 0.52rem;
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.4;
+}
+
+.disclaimer {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 16px;
+  color: rgb(191 182 174 / 0.3);
+  font-size: 0.54rem;
+  text-align: center;
+  max-width: 480px;
+  line-height: 1.4;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Buy Me a Coffee */
+.bmc-link {
+  position: fixed;
+  bottom: 14px;
+  right: 16px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 2px;
+  background: rgb(255 221 0 / 0.1);
+  border: 2px solid rgb(255 221 0 / 0.2);
+  color: #ffdd00;
+  font-size: 0.76rem;
+  font-weight: 700;
+  font-family: inherit;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.5);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    inset 0 -2px 0 rgb(0 0 0 / 0.15);
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.bmc-link:hover {
+  background: rgb(255 221 0 / 0.2);
+  border-color: rgb(255 221 0 / 0.45);
+}
+
+.bmc-icon {
+  font-size: 1.1rem;
+}
+
+/* Submit Project Button */
+.submit-project-wrap {
+  margin: 14px 0 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-project-btn {
+  position: relative;
+  display: inline-block;
+  padding: 9px 20px;
+  background: rgb(50 50 50 / 0.55);
+  border: 2px solid rgb(80 80 80 / 0.45);
+  border-radius: 2px;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.5);
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    inset 0 -2px 0 rgb(0 0 0 / 0.2),
+    0 2px 6px rgb(0 0 0 / 0.25);
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.submit-project-btn:hover {
+  background: rgb(70 70 70 / 0.6);
+  border-color: rgb(136 187 85 / 0.5);
+  color: #fff;
+}
+
+.submit-project-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 0 rgb(0 0 0 / 0.3),
+    0 1px 2px rgb(0 0 0 / 0.2);
+}
+
+/* Minecraft item tooltip */
+.mc-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  padding: 6px 8px;
+  background: #100010;
+  border: 2px solid #28007a;
+  border-image: linear-gradient(180deg, #5000d0 0%, #28007a 100%) 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 10;
+  image-rendering: pixelated;
+}
+
+.mc-tooltip::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border: 1px solid rgb(80 0 208 / 0.25);
+  pointer-events: none;
+}
+
+.submit-project-btn:hover .mc-tooltip {
+  opacity: 1;
+}
+
+.mc-tooltip-title {
+  margin: 0 0 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.mc-tooltip-desc {
+  margin: 0;
+  font-size: 0.7rem;
+  color: #aaa;
+  line-height: 1.4;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.mc-tooltip-hint {
+  margin: 6px 0 0;
+  font-size: 0.64rem;
+  color: #5f5;
+  font-style: italic;
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .top-link {
+    top: 8px;
+    right: 8px;
+  }
+
+  .top-link-image {
+    width: 46px;
+  }
+
+  .content-panel {
+    border-radius: 2px;
+    padding-top: 18px;
+    margin-top: 56px;
+  }
+
+  .repo-link-row {
+    grid-template-columns: 42px 1fr;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .techno-memorial {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .techno-pig {
+    width: 120px;
+  }
+
+  .techno-quote {
+    font-size: 1.3rem;
+  }
+
+  .top-link-image {
+    width: 60px;
+  }
+
+  .bmc-link {
+    bottom: 8px;
+    right: 8px;
+    font-size: 0.68rem;
+    padding: 6px 10px;
+  }
+}

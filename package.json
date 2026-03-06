@@ -1,0 +1,31 @@
+{
+  "name": "minecraftlegacy-web",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Frontend for Minecraft Legacy Edition project",
+  "author": "MinecraftConsole",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MinecraftConsole/MinecraftLegacy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MinecraftConsole/MinecraftLegacy/issues"
+  },
+  "homepage": "https://github.com/MinecraftConsole/MinecraftLegacy",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typeface-minecraft": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^5.4.11"
+  }
+}

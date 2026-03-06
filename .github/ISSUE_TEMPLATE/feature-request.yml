@@ -1,0 +1,22 @@
+name: Feature Request
+description: Suggest a feature or improvement for the website
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea to make the site better? Let us know.
+  - type: textarea
+    id: description
+    attributes:
+      label: What would you like?
+      description: Describe the feature or change you'd like to see.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Why?
+      description: Why would this be useful?
+    validations:
+      required: false

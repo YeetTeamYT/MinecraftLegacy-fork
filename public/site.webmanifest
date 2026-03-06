@@ -1,0 +1,26 @@
+{
+  "name": "Minecraft Legacy Repository Index",
+  "short_name": "Minecraft Legacy",
+  "description": "Search and prioritize Minecraft Legacy repositories, source mirrors, and Discord bot resources.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0e10",
+  "theme_color": "#0d0e10",
+  "icons": [
+    {
+      "src": "/logos/MINECRAFT%20LEGACY%20EDITION%20small.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logos/MINECRAFT%20LEGACY%20EDITION%20medium.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/logos/MINECRAFT%20LEGACY%20EDITION%20logo%20large.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
